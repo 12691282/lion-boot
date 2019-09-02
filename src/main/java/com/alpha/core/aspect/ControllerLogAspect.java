@@ -27,7 +27,7 @@ public class ControllerLogAspect {
 
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * com.alpha.*.controller.*.*(..))")
+    @Pointcut("execution(public * com.alpha.module.*.controller.*.*(..))")
     public void webLog(){
     }
 
