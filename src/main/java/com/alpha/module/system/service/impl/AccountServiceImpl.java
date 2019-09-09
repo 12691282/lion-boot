@@ -1,11 +1,11 @@
 package com.alpha.module.system.service.impl;
 
 import com.alpha.core.service.BaseService;
-import com.alpha.module.system.service.UserService;
+import com.alpha.module.system.service.AccountService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserserviceImpl  extends BaseService implements UserService{
+public class AccountServiceImpl extends BaseService implements AccountService {
 
 
  }
