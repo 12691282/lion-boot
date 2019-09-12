@@ -1,10 +1,12 @@
 package com.alpha.module.system.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@TableName("sys_account")
 public class Account {
 
     //主键
@@ -20,6 +22,6 @@ public class Account {
     //启用状态 0 :启用 1 停用
     private int status;
     //创建时间
-    private Date createDate;
+    private Date createTime;
 
 }
