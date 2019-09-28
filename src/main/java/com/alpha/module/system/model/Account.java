@@ -10,7 +10,7 @@ import java.util.Date;
 public class Account {
 
     //主键
-    private int id;
+    private Integer id;
     //用户名字
     private String name;
     //账号名称
@@ -20,7 +20,7 @@ public class Account {
     //备注
     private String backup;
     //启用状态 0 :启用 1 停用
-    private int status;
+    private Integer status;
     //创建时间
     private Date createTime;
 

@@ -58,6 +58,13 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
+        <!--阿里的 fast json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+
 
 
     </dependencies>

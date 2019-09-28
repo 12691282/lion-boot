@@ -53,11 +53,11 @@ public class ResultObject<T> implements Serializable {
         return new ResultObject(message, data);
     }
 
-    public static ResultObject getDefeat()
+    public static ResultObject getFailure()
     {
         return new ResultObject(defeat_code, defeat_default_msg);
     }
-    public static ResultObject getDefeat(String msg)
+    public static ResultObject getFailure(String msg)
     {
         return new ResultObject(defeat_code, msg);
     }

@@ -1,14 +1,25 @@
 package com.alpha.core.tools;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
-public class PageTools<T> {
-    private int pageIndex;
-    private int pageSize;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class PageTools<T> extends Page<T> {
+    private long pageIndex;
+    private long pageSize;
     private T list;
 
-    public PageTools(T list , int pageSize){
+
+    public PageTools(long pageIndex, long pageSize) {
+        super(pageIndex, pageSize);
+    }
+
+
+    public PageTools(T list , long pageSize){
         this.list = list;
         this.pageSize = pageSize;
     }

@@ -5,6 +5,7 @@ import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.mapper.AccountMapper;
 import com.alpha.module.system.model.Account;
 import com.alpha.module.system.service.AccountService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         private AccountMapper accountMapper;
 
         @Override
-        public PageTools getList() {
-            List<Account> list =  accountMapper.selectList(null);
-            return PageTools.getPage(list, list.size());
+        public PageTools getList(Account query) {
+            IPage list =  accountMapper.selectPage(null,null);
+            return PageTools.getPage(list, 20);
         }
 }
