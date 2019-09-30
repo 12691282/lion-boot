@@ -24,7 +24,7 @@ public class PageTools<T> extends Page<T> {
         this.pageSize = pageSize;
     }
 
-    public static <T> PageTools getPage(T list , int pageSize){
+    public static <T> PageTools getPage(T list , long pageSize){
         return new PageTools(list, pageSize);
     }
 }

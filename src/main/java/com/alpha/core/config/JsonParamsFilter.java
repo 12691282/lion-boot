@@ -3,6 +3,7 @@ package com.alpha.core.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alpha.core.constant.ConfigConstant;
+import com.alpha.core.tools.ThreadLoaclTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 
@@ -10,6 +11,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @WebFilter(urlPatterns = "/*")
@@ -33,6 +36,13 @@ public class JsonParamsFilter implements Filter {
             JSONObject parameterMap = JSON.parseObject(wrapper.toBodyString());
             Object size = parameterMap.getString("size");
             Object index = parameterMap.getString("index");
+            if(size != null && index != null){
+                Map pageMap = new HashMap<>();
+                pageMap.put("size", Integer.valueOf(size.toString()));
+                pageMap.put("index",  Integer.valueOf(index.toString()));
+                ThreadLoaclTools.getPageMap().set(pageMap);
+            }
+
 
             servletRequest =  wrapper;
         }

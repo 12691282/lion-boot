@@ -29,6 +29,7 @@ public class AccountController extends BaseController {
             PageTools page = accountService.getList(query);
             result = ResultObject.getSuccess(page);
         }catch (Exception e){
+            e.printStackTrace();
             log.error(e.getMessage());
             result = ResultObject.getFailure();
         }
