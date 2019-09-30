@@ -20,7 +20,6 @@ public class AccountController extends BaseController {
     @Autowired
     private AccountService accountService;
 
-    //todo HandlerMethodArgumentResolver
     @PostMapping("getInfo")
     public ResultObject getAccount(@RequestBody(required=false) Account query){
         log.info("params: %s", query);

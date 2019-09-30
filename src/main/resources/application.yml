@@ -14,7 +14,7 @@ spring:
     url: jdbc:mysql://10.205.29.113:3306/lionboot?useSSL=false
     username: petrodb
     password: petrodb
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       connection-test-query: SELECT 1

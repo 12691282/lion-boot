@@ -25,7 +25,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             Page<Account> page = super.getPage();
             QueryWrapper<Account> queryWrapper =  new QueryWrapper<>();
             queryWrapper.like("name", query.getName());
-            queryWrapper.like("accountName", query.getAccountName());
+            queryWrapper.like("account_name", query.getAccountName());
             IPage list =  accountMapper.selectPage(page,queryWrapper);
             return PageTools.getPage(list.getRecords(), list.getTotal());
         }
