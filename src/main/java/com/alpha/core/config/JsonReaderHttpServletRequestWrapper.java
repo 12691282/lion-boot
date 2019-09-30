@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 import java.nio.charset.Charset;
 
+/**
+ * 保存前端传出入的参数为副本
+ */
 public class JsonReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     private final byte[] body;

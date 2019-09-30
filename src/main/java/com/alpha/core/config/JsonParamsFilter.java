@@ -1,5 +1,7 @@
 package com.alpha.core.config;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alpha.core.constant.ConfigConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -25,9 +27,14 @@ public class JsonParamsFilter implements Filter {
         // 防止流读取一次后就没有了, 所以需要将流继续写出去
 
         String contentType =  servletRequest.getContentType(); //请求类型
-        if(ConfigConstant.accpetType.contains(contentType)){
+        if(contentType != null && contentType.contains(ConfigConstant.accpetType)){
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            servletRequest = new JsonReaderHttpServletRequestWrapper(httpServletRequest);
+            JsonReaderHttpServletRequestWrapper wrapper =  new JsonReaderHttpServletRequestWrapper(httpServletRequest);
+            JSONObject parameterMap = JSON.parseObject(wrapper.toBodyString());
+            Object size = parameterMap.getString("size");
+            Object index = parameterMap.getString("index");
+
+            servletRequest =  wrapper;
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
