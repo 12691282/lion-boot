@@ -1,6 +1,7 @@
 package com.alpha.module.system.controller;
 
 import com.alpha.core.controller.BaseController;
+import com.alpha.core.exception.SystemException;
 import com.alpha.core.tools.PageTools;
 import com.alpha.core.tools.ResultObject;
 import com.alpha.module.system.model.Account;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @RestController
 @RequestMapping("account")
 @Slf4j
@@ -22,11 +25,30 @@ public class AccountController extends BaseController {
 
     @PostMapping("getInfo")
     public ResultObject getAccount(@RequestBody(required=false) Account query){
-        log.info("params: %s", query);
+        log.info("params: {}", query);
         ResultObject result;
         try{
             PageTools page = accountService.getList(query);
             result = ResultObject.getSuccess(page);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
+
+
+    @PostMapping("saveOrUpdate")
+    public ResultObject saveOrUpdate(@RequestBody Account account){
+        log.info("params: {}", account);
+        ResultObject result = ResultObject.getSuccess();
+        try{
+              accountService.saveOrUpdate(account);
+        }catch (SystemException sysExc){
+            sysExc.printStackTrace();
+            log.error(sysExc.getMessage());
+            result = ResultObject.getFailure(sysExc.getMsg());
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());

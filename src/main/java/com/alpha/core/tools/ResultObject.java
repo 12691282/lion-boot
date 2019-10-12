@@ -1,5 +1,6 @@
 package com.alpha.core.tools;
 
+import com.alpha.core.constant.ExceptionConstant;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -7,11 +8,11 @@ import java.io.Serializable;
 @Data
 public class ResultObject<T> implements Serializable {
 
-    private static final String success_code = "000";
+    private static final String success_code = ExceptionConstant.SYSTEM_CODE_SUCCESS;
 
     private static final String success_default_msg = "操作成功";
 
-    private static final String defeat_code = "001";
+    private static final String defeat_code = ExceptionConstant.SYSTEM_CODE_DEFEAT;
 
     private static final String defeat_default_msg = "数据读取错误";
 
@@ -32,7 +33,11 @@ public class ResultObject<T> implements Serializable {
     public ResultObject(String code, T data){
         this.code = code;
         this.data = data;
+    }
 
+    public ResultObject(String code, String msg){
+        this.code = code;
+        this.message = msg;
     }
 
     public ResultObject(String code, String msg, T data){
@@ -42,7 +47,7 @@ public class ResultObject<T> implements Serializable {
     }
 
     public static ResultObject getSuccess(){
-        return new ResultObject(success_code);
+        return new ResultObject(success_code, success_default_msg);
     }
 
     public static <T> ResultObject getSuccess(T data){

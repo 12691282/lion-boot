@@ -1,30 +1,24 @@
 package com.alpha.core.tools;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageInfo;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.List;
 
 @Data
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class PageTools<T> extends Page<T> {
-    private long pageIndex;
-    private long pageSize;
+public class PageTools<T>{
+    private long total;
     private T list;
 
-
-    public PageTools(long pageIndex, long pageSize) {
-        super(pageIndex, pageSize);
-    }
-
-
-    public PageTools(T list , long pageSize){
+    public PageTools(T list , long total){
         this.list = list;
-        this.pageSize = pageSize;
+        this.total = total;
     }
 
-    public static <T> PageTools getPage(T list , long pageSize){
-        return new PageTools(list, pageSize);
+    public static  <T>  PageTools getPage(List<T> list){
+        PageInfo page = new PageInfo(list);
+        return new PageTools(page.getList(), page.getTotal());
     }
 }

@@ -162,14 +162,14 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <!-- root级别   DEBUG -->
+    <!-- root级别 level: STDOUT、 ERROR、 INFO 、 DEBUG -->
     <root level="INFO">
         <!-- 控制台输出 -->
         <appender-ref ref="STDOUT" />
         <!-- 文件输出 -->
         <appender-ref ref="ERROR" />
         <appender-ref ref="INFO" />
-        <!-- <appender-ref ref="WARN" />
-        <appender-ref ref="DEBUG" />-->
+        <!-- <appender-ref ref="WARN" />-->
+        <appender-ref ref="DEBUG" />
     </root>
 </configuration>
