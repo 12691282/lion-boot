@@ -12,5 +12,26 @@ public interface AccountService {
      */
     PageTools getList(Account query);
 
+    /**
+     * 新增或修改
+     * @param account
+     */
     void saveOrUpdate(Account account);
+
+    /**
+     * 停用一条数据
+     * @param id
+     */
+    void stopUseById(Account account);
+    /**
+     * 启用一条数据
+     * @param id
+     */
+    void startUseById(Account account);
+
+    /**
+     * 删除一条记录
+     * @param account
+     */
+    void deleteRecordById(Account account);
 }

@@ -1,5 +1,6 @@
 package com.alpha.module.system.service.impl;
 
+import com.alpha.core.constant.DirectionConstant;
 import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.service.BaseService;
@@ -7,16 +8,12 @@ import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.mapper.AccountMapper;
 import com.alpha.module.system.model.Account;
 import com.alpha.module.system.service.AccountService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,9 +27,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     public PageTools getList(Account query) {
         log.info("query {}", query);
         super.startPage();
-        QueryWrapper<Account> queryWrapper =  new QueryWrapper<>();
-        queryWrapper.like("name", query.getName()).like("account_name", query.getAccountName());
-        List list =  accountMapper.selectList(queryWrapper);
+        query.setStatus(DirectionConstant.USE_STATUS);
+        List list =  accountMapper.selectQueryAndPage(query);
         return PageTools.getPage(list);
     }
 
@@ -41,6 +37,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     public void saveOrUpdate(Account account) {
         log.info("account {}", account);
         if(account.getId() != null){
+            account.setUpdateTime(new Date());
             accountMapper.updateById(account);
         }else {
             try {
@@ -53,5 +50,23 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             }
 
         }
+    }
+
+    @Override
+    public void stopUseById(Account account) {
+        account.setRecordStatus(DirectionConstant.STOP_USE);
+        accountMapper.updateById(account);
+    }
+
+    @Override
+    public void startUseById(Account account) {
+        account.setRecordStatus(DirectionConstant.START_USE);
+        accountMapper.updateById(account);
+    }
+
+    @Override
+    public void deleteRecordById(Account account) {
+        account.setStatus(DirectionConstant.DELETE_STATUS);
+        accountMapper.updateById(account);
     }
 }

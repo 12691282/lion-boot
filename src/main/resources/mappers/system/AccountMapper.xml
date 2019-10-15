@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alpha.module.system.mapper.AccountMapper">
+
+    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.model.Account"
+            resultType="com.alpha.module.system.model.Account">
+        SELECT  a.id,  a.`name`, a.`account_name` AS accountName, a.`backup`, a.`email`, a.`create_time` AS createTime,
+                a.`record_status` AS recordStatus, b.dic_value AS statusName
+        FROM   sys_account a
+        LEFT JOIN sys_direction b ON b.dic_key = a.record_status
+        where b.dic_code = 'record_status' AND a.status = #{status}
+        <if test="name != null and name.length > 0">
+            <bind name="namePattern" value="'%' + name + '%'" />
+            AND a.name LIKE #{namePattern}
+        </if>
+        <if test="accountName != null and accountName.length > 0">
+            <bind name="accountNamePattern" value="'%' + accountName + '%'" />
+            AND a.account_name LIKE #{accountNamePattern}
+        </if>
+        ORDER BY a.update_time DESC
+    </select>
+</mapper>

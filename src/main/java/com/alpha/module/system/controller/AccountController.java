@@ -1,5 +1,6 @@
 package com.alpha.module.system.controller;
 
+import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.controller.BaseController;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.tools.PageTools;
@@ -45,6 +46,61 @@ public class AccountController extends BaseController {
         ResultObject result = ResultObject.getSuccess();
         try{
               accountService.saveOrUpdate(account);
+        }catch (SystemException sysExc){
+            sysExc.printStackTrace();
+            log.error(sysExc.getMessage());
+            result = ResultObject.getFailure(sysExc.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
+
+
+    @PostMapping("stopUseById")
+    public ResultObject stopUseById(@RequestBody Account account){
+        log.info("id: {}", account.getId());
+        ResultObject result = ResultObject.getSuccess();
+        try{
+            accountService.stopUseById(account);
+        }catch (SystemException sysExc){
+            sysExc.printStackTrace();
+            log.error(sysExc.getMessage());
+            result = ResultObject.getFailure(sysExc.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
+
+    @PostMapping("startUseById")
+    public ResultObject startUseById(@RequestBody Account account){
+        log.info("id: {}", account.getId());
+        ResultObject result = ResultObject.getSuccess();
+        try{
+            accountService.startUseById(account);
+        }catch (SystemException sysExc){
+            sysExc.printStackTrace();
+            log.error(sysExc.getMessage());
+            result = ResultObject.getFailure(sysExc.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
+
+    @PostMapping("deleteRecordById")
+    public ResultObject deleteRecordById(@RequestBody Account account){
+        log.info("id: {}", account.getId());
+        ResultObject result = ResultObject.getSuccess();
+        try{
+            accountService.deleteRecordById(account);
         }catch (SystemException sysExc){
             sysExc.printStackTrace();
             log.error(sysExc.getMessage());
