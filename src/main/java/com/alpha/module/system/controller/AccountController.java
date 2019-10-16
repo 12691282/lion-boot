@@ -1,11 +1,10 @@
 package com.alpha.module.system.controller;
 
-import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.controller.BaseController;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.tools.PageTools;
 import com.alpha.core.tools.ResultObject;
-import com.alpha.module.system.model.Account;
+import com.alpha.module.system.model.AccountModel;
 import com.alpha.module.system.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("account")
@@ -25,7 +22,7 @@ public class AccountController extends BaseController {
     private AccountService accountService;
 
     @PostMapping("getInfo")
-    public ResultObject getAccount(@RequestBody(required=false) Account query){
+    public ResultObject getAccount(@RequestBody(required=false) AccountModel query){
         log.info("params: {}", query);
         ResultObject result;
         try{
@@ -41,7 +38,7 @@ public class AccountController extends BaseController {
 
 
     @PostMapping("saveOrUpdate")
-    public ResultObject saveOrUpdate(@RequestBody Account account){
+    public ResultObject saveOrUpdate(@RequestBody AccountModel account){
         log.info("params: {}", account);
         ResultObject result = ResultObject.getSuccess();
         try{
@@ -60,7 +57,7 @@ public class AccountController extends BaseController {
 
 
     @PostMapping("stopUseById")
-    public ResultObject stopUseById(@RequestBody Account account){
+    public ResultObject stopUseById(@RequestBody AccountModel account){
         log.info("id: {}", account.getId());
         ResultObject result = ResultObject.getSuccess();
         try{
@@ -78,7 +75,7 @@ public class AccountController extends BaseController {
     }
 
     @PostMapping("startUseById")
-    public ResultObject startUseById(@RequestBody Account account){
+    public ResultObject startUseById(@RequestBody AccountModel account){
         log.info("id: {}", account.getId());
         ResultObject result = ResultObject.getSuccess();
         try{
@@ -96,7 +93,7 @@ public class AccountController extends BaseController {
     }
 
     @PostMapping("deleteRecordById")
-    public ResultObject deleteRecordById(@RequestBody Account account){
+    public ResultObject deleteRecordById(@RequestBody AccountModel account){
         log.info("id: {}", account.getId());
         ResultObject result = ResultObject.getSuccess();
         try{

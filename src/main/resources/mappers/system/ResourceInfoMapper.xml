@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alpha.module.system.mapper.ResourceInfoMapper">
+
+    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.model.ResourceModel"
+            resultType="com.alpha.module.system.model.ResourceModel">
+        SELECT  a.id, a.pid, c.resource_name AS pname, a.`resource_name` AS resourceName,
+                a.`resource_url` AS resourceUrl, a.`resource_type` AS resourceType,
+                b.`dic_value` AS resourceTypeName,  a.`description`
+        FROM    sys_resource a
+        LEFT JOIN sys_direction b ON b.dic_key = a.resource_type
+        LEFT JOIN sys_resource c ON c.id = a.pid
+        WHERE   b.dic_code = #{typeCode} AND  a.status = #{status}
+        <if test="resourceName != null and resourceName.length > 0">
+            <bind name="resourceNamePattern" value="'%' + resourceName + '%'" />
+                AND a.resource_name LIKE #{resourceNamePattern}
+        </if>
+            ORDER BY a.create_time DESC
+    </select>
+</mapper>

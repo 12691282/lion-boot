@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @TableName("sys_account")
-public class Account {
+public class AccountModel {
 
     //主键
     @TableId
@@ -37,5 +37,9 @@ public class Account {
     //状态名称
     @TableField(exist = false)
     private String statusName;
+
+    //字典代码
+    @TableField(exist = false)
+    private String statusCode;
 
 }

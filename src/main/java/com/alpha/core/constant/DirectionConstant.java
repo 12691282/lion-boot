@@ -15,5 +15,9 @@ public class DirectionConstant {
     //逻辑已删除
     public static final Integer DELETE_STATUS = 1;
 
+    //记录状态字典常量
+    public static final String  CODE_RECORD_STATUS = "record_status";
 
+    //记录状态字典常量
+    public static final String  CODE_RESOURCE_TYPE = "resource_type";
 }

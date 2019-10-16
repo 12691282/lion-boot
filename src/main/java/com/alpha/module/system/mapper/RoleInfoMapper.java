@@ -1,15 +1,15 @@
 package com.alpha.module.system.mapper;
 
-import com.alpha.module.system.model.AccountModel;
+import com.alpha.module.system.model.RoleModel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 
-public interface AccountMapper  extends BaseMapper<AccountModel> {
+public interface RoleInfoMapper extends BaseMapper<RoleModel> {
     /**
      * 查询及分页
      * @param query
      * @return
      */
-    List<AccountModel> selectQueryAndPage(AccountModel query);
+    List<RoleModel> selectQueryAndPage(RoleModel query);
 }

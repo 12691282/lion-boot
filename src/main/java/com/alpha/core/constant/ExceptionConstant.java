@@ -9,5 +9,5 @@ public class ExceptionConstant {
     public static final String  SYSTEM_CODE_TOKEN_ERROR = "101";
 
 
-    public static final String  MESSAGE_ACCOUNT_NAME = "账户名已存在";
+    public static final String MESSAGE_NAME_EXIST = "名称已存在";
 }

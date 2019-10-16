@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alpha.module.system.mapper.RoleInfoMapper">
+
+    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.model.RoleModel"
+            resultType="com.alpha.module.system.model.RoleModel">
+        SELECT  a.id,  a.`role_name` AS roleName, a.`description`
+        FROM   sys_role a
+        where  a.status = #{status}
+        <if test="roleName != null and roleName.length > 0">
+            <bind name="roleNamePattern" value="'%' + roleName + '%'" />
+            AND a.role_name LIKE #{roleNamePattern}
+        </if>
+        ORDER BY a.create_time DESC
+    </select>
+</mapper>
