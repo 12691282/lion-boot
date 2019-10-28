@@ -4,6 +4,7 @@ import com.alpha.core.controller.BaseController;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.tools.PageTools;
 import com.alpha.core.tools.ResultObject;
+import com.alpha.module.system.bean.ResourceTreeBean;
 import com.alpha.module.system.model.ResourceModel;
 import com.alpha.module.system.model.RoleModel;
 import com.alpha.module.system.service.ResourceInfoService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("resource")
 @Slf4j
@@ -22,13 +25,13 @@ public class ResourceController extends BaseController {
     @Autowired
     private ResourceInfoService resourceInfoService;
 
-    @PostMapping("getList")
-    public ResultObject getList(@RequestBody(required=false) ResourceModel query){
+    @PostMapping("getTreeList")
+    public ResultObject getTreeList(@RequestBody(required=false) ResourceTreeBean query){
         log.info("params: {}", query);
         ResultObject result;
         try{
-            PageTools page = resourceInfoService.getList(query);
-            result = ResultObject.getSuccess(page);
+            List<ResourceTreeBean> treeList = resourceInfoService.getTreeList(query);
+            result = ResultObject.getSuccess(treeList);
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());

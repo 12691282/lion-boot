@@ -9,9 +9,11 @@ public class BaseService {
 
     protected void startPage() {
         Map pageMap  = (Map) ThreadLoaclTools.getPageMap().get();
-        Integer size = (Integer) pageMap.get("size");
-        Integer index = (Integer) pageMap.get("index");
-        PageHelper.startPage(index, size);
+        if(pageMap != null){
+            Integer size = (Integer) pageMap.get("size");
+            Integer index = (Integer) pageMap.get("index");
+            PageHelper.startPage(index, size);
+        }
     }
 
 }

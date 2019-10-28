@@ -1,20 +1,22 @@
-package com.alpha.module.system.model;
+package com.alpha.module.system.bean;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Data
-@TableName("sys_resource")
-public class ResourceModel {
+public class ResourceTreeBean implements Serializable {
     //主键
     @TableId
     private Long id;
     //父主键
     private Long pid;
+    //父资源名称
+    private String pname;
     //资源名称
     private String resourceName;
     //资源连接
@@ -22,7 +24,6 @@ public class ResourceModel {
     //资源类型  0:菜单1按钮
     private Integer resourceType;
     //资源类型名称
-    @TableField(exist = false)
     private String resourceTypeName;
     //描述
     private String description;
@@ -30,4 +31,11 @@ public class ResourceModel {
     private Integer status;
     //创建时间
     private Date createTime;
+    //字典代码
+    private String typeCode;
+
+    private List<ResourceTreeBean> children = new LinkedList<>();
+
+
+
 }

@@ -5,6 +5,7 @@ import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.service.BaseService;
 import com.alpha.core.tools.PageTools;
+import com.alpha.module.system.bean.ResourceTreeBean;
 import com.alpha.module.system.mapper.ResourceInfoMapper;
 import com.alpha.module.system.mapper.RoleInfoMapper;
 import com.alpha.module.system.model.ResourceModel;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -26,14 +29,40 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
     private ResourceInfoMapper resourceInfoMapper;
 
     @Override
-    public PageTools getList(ResourceModel query) {
+    public List getTreeList(ResourceTreeBean query) {
         log.info("query {}", query);
-        super.startPage();
         query.setStatus(DirectionConstant.USE_STATUS);
         query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
-        List list =  resourceInfoMapper.selectQueryAndPage(query);
-        return PageTools.getPage(list);
+        List<ResourceTreeBean> beansList =  resourceInfoMapper.selectQueryAndPage(query);
+        if(beansList.isEmpty()){
+            return Collections.emptyList();
+        }
+        List<ResourceTreeBean> treeList = new LinkedList<>();
+
+        for(ResourceTreeBean bean : beansList){
+            if(bean.getPid() == null){
+                treeList.add(bean);
+                this.toRecursionTree(bean,beansList);
+            }
+        }
+        return  treeList;
     }
+
+    /**
+     * 递归生成树
+     * @param pBean
+     * @param beansList
+     */
+    private void toRecursionTree(ResourceTreeBean pBean,  List<ResourceTreeBean> beansList) {
+        for(ResourceTreeBean bean : beansList){
+            if(pBean.getId().equals(bean.getPid())){
+                pBean.getChildren().add(bean);
+                this.toRecursionTree(bean,beansList);
+            }
+        }
+   }
+
+
 
     @Override
     @Transactional

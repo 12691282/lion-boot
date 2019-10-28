@@ -3,8 +3,8 @@
 
 <mapper namespace="com.alpha.module.system.mapper.ResourceInfoMapper">
 
-    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.model.ResourceModel"
-            resultType="com.alpha.module.system.model.ResourceModel">
+    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.bean.ResourceTreeBean"
+            resultType="com.alpha.module.system.bean.ResourceTreeBean">
         SELECT  a.id, a.pid, c.resource_name AS pname, a.`resource_name` AS resourceName,
                 a.`resource_url` AS resourceUrl, a.`resource_type` AS resourceType,
                 b.`dic_value` AS resourceTypeName,  a.`description`

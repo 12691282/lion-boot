@@ -5,11 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @TableName("sys_account")
-public class AccountModel {
+public class AccountModel implements Serializable {
 
     //主键
     @TableId
