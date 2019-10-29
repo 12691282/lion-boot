@@ -74,9 +74,11 @@ CREATE TABLE `sys_resource`  (
   `resource_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源名字',
   `resource_url` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源链接',
   `resource_type` tinyint(1) DEFAULT NULL COMMENT '资源类型: 0:菜单1按钮',
+  `icon` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图标',
   `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
   `status` tinyint(1) DEFAULT 0 COMMENT '逻辑状态 0 :使用 1 删除',
   `create_time` datetime(0) DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `order_no` tinyint(4) DEFAULT NULL COMMENT '排序号',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unique_account`(`resource_name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;

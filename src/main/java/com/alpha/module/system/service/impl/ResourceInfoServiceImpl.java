@@ -33,21 +33,30 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         log.info("query {}", query);
         query.setStatus(DirectionConstant.USE_STATUS);
         query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
-        List<ResourceTreeBean> beansList =  resourceInfoMapper.selectQueryAndPage(query);
+        List<ResourceTreeBean> beansList =  resourceInfoMapper.selectBeanList(query);
         if(beansList.isEmpty()){
             return Collections.emptyList();
         }
-        List<ResourceTreeBean> treeList = new LinkedList<>();
 
+        List<ResourceTreeBean> treeList = new LinkedList<>();
+        this.toFillBeanTree(treeList, beansList);
+
+        return  treeList;
+    }
+
+    /**
+     * 从顶层开始遍历
+     * @param treeList
+     * @param beansList
+     */
+    private void toFillBeanTree(List<ResourceTreeBean> treeList, List<ResourceTreeBean> beansList) {
         for(ResourceTreeBean bean : beansList){
             if(bean.getPid() == null){
                 treeList.add(bean);
                 this.toRecursionTree(bean,beansList);
             }
         }
-        return  treeList;
     }
-
     /**
      * 递归生成树
      * @param pBean
@@ -89,5 +98,16 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         log.info("resource {}", resource);
         resource.setStatus(DirectionConstant.DELETE_STATUS);
         resourceInfoMapper.updateById(resource);
+    }
+
+    @Override
+    public List<ResourceTreeBean> getAccountResourceList(long accountId) {
+        ResourceTreeBean query = new ResourceTreeBean();
+        query.setStatus(DirectionConstant.USE_STATUS);
+        query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
+        List<ResourceTreeBean> beansList =  resourceInfoMapper.selectBeanList(query);
+        List<ResourceTreeBean> treeList = new LinkedList<>();
+        this.toFillBeanTree(treeList, beansList);
+        return treeList;
     }
 }

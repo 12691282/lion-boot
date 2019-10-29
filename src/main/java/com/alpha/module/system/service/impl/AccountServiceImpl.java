@@ -8,6 +8,7 @@ import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.mapper.AccountMapper;
 import com.alpha.module.system.model.AccountModel;
 import com.alpha.module.system.service.AccountService;
+import com.alpha.module.system.service.ResourceInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     @Autowired
     private AccountMapper accountMapper;
+
+    @Autowired
+    private ResourceInfoService resourceInfoService;
 
     @Override
     public PageTools getList(AccountModel query) {
@@ -72,5 +76,10 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     public void deleteRecordById(AccountModel account) {
         account.setStatus(DirectionConstant.DELETE_STATUS);
         accountMapper.updateById(account);
+    }
+
+    @Override
+    public List getResourceList() {
+        return resourceInfoService.getAccountResourceList(1L);
     }
 }

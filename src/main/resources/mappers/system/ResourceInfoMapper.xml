@@ -3,11 +3,11 @@
 
 <mapper namespace="com.alpha.module.system.mapper.ResourceInfoMapper">
 
-    <select id="selectQueryAndPage" parameterType="com.alpha.module.system.bean.ResourceTreeBean"
+    <select id="selectBeanList" parameterType="com.alpha.module.system.bean.ResourceTreeBean"
             resultType="com.alpha.module.system.bean.ResourceTreeBean">
         SELECT  a.id, a.pid, c.resource_name AS pname, a.`resource_name` AS resourceName,
-                a.`resource_url` AS resourceUrl, a.`resource_type` AS resourceType,
-                b.`dic_value` AS resourceTypeName,  a.`description`
+                a.`resource_url` AS resourceUrl, a.`resource_type` AS resourceType, a.`icon`,
+                b.`dic_value` AS resourceTypeName,  a.`description`, a.`order_no` AS orderNo
         FROM    sys_resource a
         LEFT JOIN sys_direction b ON b.dic_key = a.resource_type
         LEFT JOIN sys_resource c ON c.id = a.pid
@@ -16,6 +16,6 @@
             <bind name="resourceNamePattern" value="'%' + resourceName + '%'" />
                 AND a.resource_name LIKE #{resourceNamePattern}
         </if>
-            ORDER BY a.create_time DESC
+            ORDER BY a.order_no ASC
     </select>
 </mapper>

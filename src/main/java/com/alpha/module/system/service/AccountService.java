@@ -3,6 +3,8 @@ package com.alpha.module.system.service;
 import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.model.AccountModel;
 
+import java.util.List;
+
 public interface AccountService {
     /**
      * 查询账号信息
@@ -33,4 +35,10 @@ public interface AccountService {
      * @param account
      */
     void deleteRecordById(AccountModel account);
+
+    /**
+     * 获取资源列表
+     * @return
+     */
+    List getResourceList();
 }

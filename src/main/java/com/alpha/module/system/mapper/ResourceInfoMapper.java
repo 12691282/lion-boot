@@ -13,5 +13,5 @@ public interface ResourceInfoMapper extends BaseMapper<ResourceModel> {
      * @param query
      * @return
      */
-    List<ResourceTreeBean> selectQueryAndPage(ResourceTreeBean query);
+    List<ResourceTreeBean> selectBeanList(ResourceTreeBean query);
 }

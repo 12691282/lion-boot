@@ -25,6 +25,10 @@ public class ResourceTreeBean implements Serializable {
     private Integer resourceType;
     //资源类型名称
     private String resourceTypeName;
+    //顺序号
+    private String orderNo;
+    //图标
+    private String icon;
     //描述
     private String description;
     //逻辑状态 0 :使用 1 删除
@@ -33,6 +37,7 @@ public class ResourceTreeBean implements Serializable {
     private Date createTime;
     //字典代码
     private String typeCode;
+
 
     private List<ResourceTreeBean> children = new LinkedList<>();
 

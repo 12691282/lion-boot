@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("account")
 @Slf4j
@@ -102,6 +104,23 @@ public class AccountController extends BaseController {
             sysExc.printStackTrace();
             log.error(sysExc.getMessage());
             result = ResultObject.getFailure(sysExc.getMsg());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
+
+
+
+    @PostMapping("getResourceList")
+    public ResultObject getResourceList(){
+        log.info("params: ");
+        ResultObject result;
+        try{
+            List list = accountService.getResourceList();
+            result = ResultObject.getSuccess(list);
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());

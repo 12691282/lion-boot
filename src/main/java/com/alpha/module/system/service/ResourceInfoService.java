@@ -23,4 +23,11 @@ public interface ResourceInfoService {
      * @param role
      */
     void deleteRecordById(ResourceModel role);
+
+    /**
+     * 根据用户id获取资源列表
+     * @param l
+     * @return
+     */
+    List<ResourceTreeBean> getAccountResourceList(long l);
 }
