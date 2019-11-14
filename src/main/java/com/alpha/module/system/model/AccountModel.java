@@ -35,6 +35,13 @@ public class AccountModel implements Serializable {
     //更新时间
     private Date updateTime;
 
+    //token
+    @TableField(exist = false)
+    private String token;
+    //过期时间
+    @TableField(exist = false)
+    private Date expireTime;
+
     //状态名称
     @TableField(exist = false)
     private String statusName;

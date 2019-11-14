@@ -1,6 +1,7 @@
 package com.alpha.module.system.service;
 
 import com.alpha.core.tools.PageTools;
+import com.alpha.module.system.bean.UserInfoBean;
 import com.alpha.module.system.model.AccountModel;
 
 import java.util.List;
@@ -41,4 +42,11 @@ public interface AccountService {
      * @return
      */
     List getResourceList();
+
+    /**
+     *
+     * @param account
+     * @return
+     */
+    UserInfoBean loginByAccount(AccountModel account);
 }
