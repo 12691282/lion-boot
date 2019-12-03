@@ -105,3 +105,14 @@ CREATE TABLE `sys_role_relation_resource`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色与资源关联表' ROW_FORMAT = Dynamic;
 
+INSERT INTO `sys_resource` VALUES (1, NULL, '系统菜单', NULL, 0, NULL, 1, '2019-10-28 11:25:44', 1, NULL);
+INSERT INTO `sys_resource` VALUES (2, NULL, '系统管理', 'system/manage', 0, NULL, 0, '2019-10-28 11:25:54', 2, NULL);
+INSERT INTO `sys_resource` VALUES (3, NULL, '功能模块1', 'fundetion/module', 0, NULL, 0, '2019-10-28 11:26:05', 3, NULL);
+INSERT INTO `sys_resource` VALUES (4, 2, '账号管理', 'system/accountList', 0, '', 0, '2019-10-28 11:27:18', 1, NULL);
+INSERT INTO `sys_resource` VALUES (5, 2, '角色管理', 'system/roleList', 0, NULL, 0, '2019-10-28 11:43:52', 2, NULL);
+INSERT INTO `sys_resource` VALUES (6, 2, '资源管理', 'system/resourceList', 0, '', 0, '2019-11-07 09:59:12', 3, NULL);
+INSERT INTO `sys_resource` VALUES (7, 2, '组织机构管理', 'system/organizationList', 0, '', 0, '2019-11-07 10:09:36', 4, NULL);
+INSERT INTO `sys_resource` VALUES (8, 2, '权限管理', 'system/authorityManage', 0, '', 0, '2019-11-07 10:25:36', 5, NULL);
+INSERT INTO `sys_resource` VALUES (9, 2, '字典管理', 'system/directionList', 0, '', 0, '2019-11-07 10:26:16', 6, NULL);
+INSERT INTO `sys_resource` VALUES (10, 3, '功能模块-A-1', '22', 0, '', 0, '2019-11-20 11:04:22', 1, NULL);
+INSERT INTO `sys_resource` VALUES (11, 3, '功能模块-A-2', '22', 0, '2', 0, '2019-11-20 11:04:38', 2, NULL);
