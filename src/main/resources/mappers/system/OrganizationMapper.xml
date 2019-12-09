@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alpha.module.system.mapper.OrganizationMapper">
+    <select id="getOrganizationPageList" parameterType="java.util.Map"
+            resultType="com.alpha.module.system.bean.OrganizationTreeBean">
+        SELECT a.id, a.organization_name AS organizationName,
+                date_format(a.create_time , '%Y-%c-%d' )  AS createTime,
+                b.organization_name AS pName, c.dic_value AS stateName
+        FROM sys_organization a
+        LEFT JOIN sys_organization b ON b.id = a.pid
+        LEFT JOIN sys_direction c ON c.dic_key = a.state
+        where c.dic_code =  #{stateCode}  AND a.state =  #{state}
+        <if test="name != null and name.length > 0">
+            <bind name="namePattern" value="'%' + name " />
+            AND a.organization_name LIKE #{namePattern}
+        </if>
+        ORDER BY a.update_time DESC
+    </select>
+</mapper>

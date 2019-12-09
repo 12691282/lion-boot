@@ -7,7 +7,7 @@
             resultType="com.alpha.module.system.model.RoleModel">
         SELECT  a.id,  a.`role_name` AS roleName, a.`description`
         FROM   sys_role a
-        where  a.status = #{status}
+        where  a.state = #{state}
         <if test="roleName != null and roleName.length > 0">
             <bind name="roleNamePattern" value="'%' + roleName + '%'" />
             AND a.role_name LIKE #{roleNamePattern}

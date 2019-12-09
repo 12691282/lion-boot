@@ -24,10 +24,10 @@ public class AccountModel implements Serializable {
     //备注
     private String backup;
     //逻辑状态 0 :使用 1 删除
-    private Integer status;
+    private Integer state;
 
     //启用状态 0 :启用 1 停用
-    private Integer recordStatus;
+    private Integer recordState;
     //电子邮箱
     private String email;
     //创建时间
@@ -44,10 +44,10 @@ public class AccountModel implements Serializable {
 
     //状态名称
     @TableField(exist = false)
-    private String statusName;
+    private String stateName;
 
     //字典代码
     @TableField(exist = false)
-    private String statusCode;
+    private String stateCode;
 
 }

@@ -11,7 +11,7 @@ public class DirectionConstant {
     public static final Integer STOP_USE = 1;
 
     //逻辑正常使用
-    public static final Integer USE_STATUS = 0;
+    public static final Integer USE_STATE = 0;
     //逻辑已删除
     public static final Integer DELETE_STATUS = 1;
 

@@ -32,7 +32,7 @@ public class ResourceTreeBean implements Serializable {
     //描述
     private String description;
     //逻辑状态 0 :使用 1 删除
-    private Integer status;
+    private Integer state;
     //创建时间
     private Date createTime;
     //字典代码

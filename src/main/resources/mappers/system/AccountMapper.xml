@@ -6,10 +6,10 @@
     <select id="selectQueryAndPage" parameterType="com.alpha.module.system.model.AccountModel"
             resultType="com.alpha.module.system.model.AccountModel">
         SELECT  a.id,  a.`name`, a.`account_name` AS accountName, a.`backup`, a.`email`,
-                a.`record_status` AS recordStatus, b.dic_value AS statusName
+                a.`record_state` AS recordState, b.dic_value AS stateName
         FROM   sys_account a
-        LEFT JOIN sys_direction b ON b.dic_key = a.record_status
-        where b.dic_code = #{statusCode}  AND a.status = #{status}
+        LEFT JOIN sys_direction b ON b.dic_key = a.record_state
+        where b.dic_code = #{stateCode}  AND a.state = #{state}
         <if test="name != null and name.length > 0">
             <bind name="namePattern" value="'%' + name + '%'" />
             AND a.name LIKE #{namePattern}

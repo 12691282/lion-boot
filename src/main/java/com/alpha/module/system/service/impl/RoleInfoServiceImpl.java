@@ -26,7 +26,7 @@ public class RoleInfoServiceImpl extends BaseService implements RoleInfoService 
     public PageTools getList(RoleModel query) {
         log.info("query {}", query);
         super.startPage();
-        query.setStatus(DirectionConstant.USE_STATUS);
+        query.setState(DirectionConstant.USE_STATE);
         List list =  roleInfoMapper.selectQueryAndPage(query);
         return PageTools.getPage(list);
     }
@@ -54,7 +54,7 @@ public class RoleInfoServiceImpl extends BaseService implements RoleInfoService 
 
     @Override
     public void deleteRecordById(RoleModel role) {
-        role.setStatus(DirectionConstant.DELETE_STATUS);
+        role.setState(DirectionConstant.DELETE_STATUS);
         roleInfoMapper.updateById(role);
     }
 }

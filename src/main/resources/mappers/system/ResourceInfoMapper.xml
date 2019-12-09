@@ -11,7 +11,7 @@
         FROM    sys_resource a
         LEFT JOIN sys_direction b ON b.dic_key = a.resource_type
         LEFT JOIN sys_resource c ON c.id = a.pid
-        WHERE   b.dic_code = #{typeCode} AND  a.status = #{status}
+        WHERE   b.dic_code = #{typeCode} AND  a.state = #{state}
         <if test="resourceName != null and resourceName.length > 0">
             <bind name="resourceNamePattern" value="'%' + resourceName + '%'" />
                 AND a.resource_name LIKE #{resourceNamePattern}

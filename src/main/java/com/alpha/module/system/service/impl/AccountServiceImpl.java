@@ -35,8 +35,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     public PageTools getList(AccountModel query) {
         log.info("query {}", query);
         super.startPage();
-        query.setStatus(DirectionConstant.USE_STATUS);
-        query.setStatusCode(DirectionConstant.CODE_RECORD_STATUS);
+        query.setState(DirectionConstant.USE_STATE);
+        query.setStateCode(DirectionConstant.CODE_RECORD_STATUS);
         List list =  accountMapper.selectQueryAndPage(query);
         return PageTools.getPage(list);
     }
@@ -66,19 +66,19 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     @Override
     public void stopUseById(AccountModel account) {
-        account.setRecordStatus(DirectionConstant.STOP_USE);
+        account.setRecordState(DirectionConstant.STOP_USE);
         accountMapper.updateById(account);
     }
 
     @Override
     public void startUseById(AccountModel account) {
-        account.setRecordStatus(DirectionConstant.START_USE);
+        account.setRecordState(DirectionConstant.START_USE);
         accountMapper.updateById(account);
     }
 
     @Override
     public void deleteRecordById(AccountModel account) {
-        account.setStatus(DirectionConstant.DELETE_STATUS);
+        account.setState(DirectionConstant.DELETE_STATUS);
         accountMapper.updateById(account);
     }
 
@@ -92,7 +92,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         log.info("account {}", account);
         QueryWrapper<AccountModel> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("account_name", account.getAccountName())
-                    .eq("status", DirectionConstant.USE_STATUS)
+                    .eq("status", DirectionConstant.USE_STATE)
                     .eq("record_status",DirectionConstant.START_USE);
         AccountModel newAccount = accountMapper.selectOne(queryWrapper);
         if(newAccount  == null){
