@@ -5,6 +5,7 @@ import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.service.BaseService;
 import com.alpha.module.system.bean.OrganizationTreeBean;
+import com.alpha.module.system.bean.ResourceTreeBean;
 import com.alpha.module.system.mapper.OrganizationMapper;
 import com.alpha.module.system.model.OrganizationModel;
 import com.alpha.module.system.service.OrganizationService;
@@ -26,15 +27,35 @@ public class OrganizationServiceImpl extends BaseService implements Organization
     public List getOrganizationPageList(OrganizationModel query) {
         Map param = new HashMap();
         log.info("query {}", query);
-        super.startPage();
         param.put("name", query.getOrganizationName());
-        param.put("state",DirectionConstant.USE_STATE);
-        param.put("stateCode" ,DirectionConstant.CODE_RECORD_STATUS);
-        List<OrganizationTreeBean> beanList =  organizationMapper.getOrganizationPageList(param);
-        if(beanList.isEmpty()){
+//        param.put("state",DirectionConstant.USE_STATE);
+        param.put("stateCode" ,DirectionConstant.CODE_RECORD_STATE);
+        List<OrganizationTreeBean> beansList =  organizationMapper.getOrganizationPageList(param);
+        if(beansList.isEmpty()){
             return Collections.emptyList();
         }
-        return beanList;
+        List<OrganizationTreeBean> treeList = new LinkedList<>();
+        for(OrganizationTreeBean  bean : beansList){
+            if(bean.getPid() == null){
+                treeList.add(bean);
+                this.toRecursionTree(bean,beansList);
+            }
+        }
+        return treeList;
+    }
+
+    /**
+     * 递归生成树
+     * @param pBean
+     * @param beansList
+     */
+    private void toRecursionTree(OrganizationTreeBean pBean, List<OrganizationTreeBean> beansList) {
+        for(OrganizationTreeBean bean : beansList){
+            if(pBean.getId().equals(bean.getPid())){
+                pBean.getChildren().add(bean);
+                this.toRecursionTree(bean,beansList);
+            }
+        }
     }
 
     @Override

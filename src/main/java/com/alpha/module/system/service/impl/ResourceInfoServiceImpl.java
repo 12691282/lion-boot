@@ -92,7 +92,7 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
     @Override
     public void deleteRecordById(ResourceModel resource) {
         log.info("resource {}", resource);
-        resource.setState(DirectionConstant.DELETE_STATUS);
+        resource.setState(DirectionConstant.DELETE_STATE);
         resourceInfoMapper.updateById(resource);
     }
 

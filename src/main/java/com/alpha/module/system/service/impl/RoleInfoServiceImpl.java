@@ -54,7 +54,7 @@ public class RoleInfoServiceImpl extends BaseService implements RoleInfoService 
 
     @Override
     public void deleteRecordById(RoleModel role) {
-        role.setState(DirectionConstant.DELETE_STATUS);
+        role.setState(DirectionConstant.DELETE_STATE);
         roleInfoMapper.updateById(role);
     }
 }

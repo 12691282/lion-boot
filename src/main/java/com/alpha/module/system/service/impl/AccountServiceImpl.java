@@ -36,7 +36,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         log.info("query {}", query);
         super.startPage();
         query.setState(DirectionConstant.USE_STATE);
-        query.setStateCode(DirectionConstant.CODE_RECORD_STATUS);
+        query.setStateCode(DirectionConstant.CODE_RECORD_STATE);
         List list =  accountMapper.selectQueryAndPage(query);
         return PageTools.getPage(list);
     }
@@ -78,7 +78,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     @Override
     public void deleteRecordById(AccountModel account) {
-        account.setState(DirectionConstant.DELETE_STATUS);
+        account.setState(DirectionConstant.DELETE_STATE);
         accountMapper.updateById(account);
     }
 
@@ -92,8 +92,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         log.info("account {}", account);
         QueryWrapper<AccountModel> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("account_name", account.getAccountName())
-                    .eq("status", DirectionConstant.USE_STATE)
-                    .eq("record_status",DirectionConstant.START_USE);
+                    .eq("state", DirectionConstant.USE_STATE)
+                    .eq("record_state",DirectionConstant.START_USE);
         AccountModel newAccount = accountMapper.selectOne(queryWrapper);
         if(newAccount  == null){
             throw new SystemException("账号不存在，请重新输入！");

@@ -4,15 +4,18 @@
 <mapper namespace="com.alpha.module.system.mapper.OrganizationMapper">
     <select id="getOrganizationPageList" parameterType="java.util.Map"
             resultType="com.alpha.module.system.bean.OrganizationTreeBean">
-        SELECT a.id, a.organization_name AS organizationName,
+        SELECT a.id, a.organization_name AS organizationName,a.pid,a.description,
                 date_format(a.create_time , '%Y-%c-%d' )  AS createTime,
-                b.organization_name AS pName, c.dic_value AS stateName
+                b.organization_name AS pName, c.dic_value AS stateName, a.state
         FROM sys_organization a
         LEFT JOIN sys_organization b ON b.id = a.pid
         LEFT JOIN sys_direction c ON c.dic_key = a.state
-        where c.dic_code =  #{stateCode}  AND a.state =  #{state}
+        where c.dic_code =  #{stateCode}
+        <if test="state != null and state.length > 0">
+            AND a.state =  #{state}
+        </if>
         <if test="name != null and name.length > 0">
-            <bind name="namePattern" value="'%' + name " />
+            <bind name="namePattern" value="'%' + name +'%'" />
             AND a.organization_name LIKE #{namePattern}
         </if>
         ORDER BY a.update_time DESC

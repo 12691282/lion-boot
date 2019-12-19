@@ -13,10 +13,10 @@ public class DirectionConstant {
     //逻辑正常使用
     public static final Integer USE_STATE = 0;
     //逻辑已删除
-    public static final Integer DELETE_STATUS = 1;
+    public static final Integer DELETE_STATE = 1;
 
     //记录状态字典常量
-    public static final String  CODE_RECORD_STATUS = "record_status";
+    public static final String CODE_RECORD_STATE = "record_state";
 
     //记录状态字典常量
     public static final String  CODE_RESOURCE_TYPE = "resource_type";

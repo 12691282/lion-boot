@@ -23,6 +23,8 @@ public class OrganizationTreeBean implements Serializable {
     private String description;
     //状态名
     private String stateName;
+    //状态位
+    private  String state;
     //创建时间
     private String createTime;
 
