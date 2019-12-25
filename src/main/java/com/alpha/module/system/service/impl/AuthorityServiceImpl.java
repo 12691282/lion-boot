@@ -37,11 +37,11 @@ public class AuthorityServiceImpl extends BaseService implements AuthorityServic
     public void updateAuthorityById(Map param) {
         Object id = param.get("id");
         Object roleIds = param.get("roleIds");
-        if(roleIds == null){
-            accountRelationRoleMapper.delete(
-                    new QueryWrapper<AccountRelationRoleModel>().eq("account_id",id)
-            );
-        }else {
+
+        accountRelationRoleMapper.delete(
+                new QueryWrapper<AccountRelationRoleModel>().eq("account_id",id)
+        );
+        if(roleIds != null){
             List idsList = (ArrayList)roleIds;
             AccountRelationRoleModel arrm = null;
             for(Object objId : idsList){

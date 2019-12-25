@@ -30,5 +30,9 @@ public interface RoleInfoService {
      */
     List getRoleList();
 
-
+    /**
+     * 根据角色id配置和更新资源
+     * @param params
+     */
+    void configAndUpdateByRoleId(Map params);
 }

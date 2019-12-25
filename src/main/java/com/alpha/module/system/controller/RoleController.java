@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("role")
 @Slf4j
@@ -73,4 +75,18 @@ public class RoleController extends BaseController {
         return result;
     }
 
+
+    @PostMapping("configAndUpdateByRoleId")
+    public ResultObject configAndUpdateByRoleId(@RequestBody Map params){
+        log.info("params: {}", params);
+        ResultObject result = ResultObject.getSuccess();
+        try{
+            roleInfoService.configAndUpdateByRoleId(params);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
 }
