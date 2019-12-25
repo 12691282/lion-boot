@@ -20,4 +20,17 @@
         </if>
         ORDER BY a.update_time DESC
     </select>
+
+
+    <select id="getAuthorityPageList"  resultType="java.util.Map">
+         SELECT a.id, a.name, a.account_name AS accountName, b.roleNameList, roleIdList
+         FROM sys_account a
+         LEFT JOIN (
+               SELECT a.account_id,group_concat(b.role_name) AS roleNameList,
+                      group_concat(a.role_id) AS roleIdList
+               FROM  sys_account_relation_role a
+               LEFT JOIN  sys_role b ON b.id = a.role_id
+               GROUP BY a.account_id
+         ) b ON b.account_id = a.id
+    </select>
 </mapper>

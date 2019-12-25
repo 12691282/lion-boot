@@ -3,6 +3,9 @@ package com.alpha.module.system.service;
 import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.model.RoleModel;
 
+import java.util.List;
+import java.util.Map;
+
 public interface RoleInfoService {
     /**
      * 查询账号信息
@@ -20,4 +23,12 @@ public interface RoleInfoService {
      * @param role
      */
     void deleteRecordById(RoleModel role);
+
+    /**
+     * 获取所有角色
+     * @return
+     */
+    List getRoleList();
+
+
 }

@@ -5,15 +5,20 @@ import com.alpha.core.constant.ExceptionConstant;
 import com.alpha.core.exception.SystemException;
 import com.alpha.core.service.BaseService;
 import com.alpha.core.tools.PageTools;
+import com.alpha.module.system.mapper.AccountRelationRoleMapper;
 import com.alpha.module.system.mapper.RoleInfoMapper;
+import com.alpha.module.system.model.AccountRelationRoleModel;
 import com.alpha.module.system.model.RoleModel;
 import com.alpha.module.system.service.RoleInfoService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -21,6 +26,7 @@ public class RoleInfoServiceImpl extends BaseService implements RoleInfoService 
 
     @Autowired
     private RoleInfoMapper roleInfoMapper;
+
 
     @Override
     public PageTools getList(RoleModel query) {
@@ -57,4 +63,12 @@ public class RoleInfoServiceImpl extends BaseService implements RoleInfoService 
         role.setState(DirectionConstant.DELETE_STATE);
         roleInfoMapper.updateById(role);
     }
+
+    @Override
+    public List getRoleList() {
+        return   roleInfoMapper.selectList(
+                new QueryWrapper<RoleModel>().eq("state", DirectionConstant.USE_STATE)
+        );
+    }
+
 }

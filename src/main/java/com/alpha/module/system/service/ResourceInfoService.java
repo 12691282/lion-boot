@@ -1,6 +1,5 @@
 package com.alpha.module.system.service;
 
-import com.alpha.core.tools.PageTools;
 import com.alpha.module.system.bean.ResourceTreeBean;
 import com.alpha.module.system.model.ResourceModel;
 
@@ -30,4 +29,11 @@ public interface ResourceInfoService {
      * @return
      */
     List<ResourceTreeBean> getAccountResourceList(long l);
+
+    /**
+     *  获取已配置的资源树
+     * @param roleId
+     * @return
+     */
+    List<ResourceTreeBean> getConfigTreeById(Long roleId);
 }

@@ -11,7 +11,6 @@ import java.util.List;
 @Data
 public class ResourceTreeBean implements Serializable {
     //主键
-    @TableId
     private Long id;
     //父主键
     private Long pid;
@@ -37,6 +36,8 @@ public class ResourceTreeBean implements Serializable {
     private Date createTime;
     //字典代码
     private String typeCode;
+    //角色id
+    private Long roleId;
 
 
     private List<ResourceTreeBean> children = new LinkedList<>();

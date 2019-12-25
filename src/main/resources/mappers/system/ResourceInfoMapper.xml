@@ -18,4 +18,18 @@
         </if>
             ORDER BY a.order_no ASC
     </select>
+
+    <select id="getConfigTreeById" parameterType="com.alpha.module.system.bean.ResourceTreeBean"
+            resultType="com.alpha.module.system.bean.ResourceTreeBean">
+        SELECT a.id, a.pid, a.resource_name AS resourceName, b.roleId FROM  sys_resource  a
+        LEFT  JOIN (
+            SELECT  role_id AS roleId, resource_id
+            FROM  sys_role_relation_resource
+            WHERE role_id = #{roleId}
+        ) b
+        ON b.resource_id = a.id
+        WHERE   a.state = #{state}
+        ORDER BY a.order_no ASC
+    </select>
+
 </mapper>

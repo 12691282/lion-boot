@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("resource")
@@ -30,6 +31,9 @@ public class ResourceController extends BaseController {
         log.info("params: {}", query);
         ResultObject result;
         try{
+            if(query == null){
+                query = new ResourceTreeBean();
+            }
             List<ResourceTreeBean> treeList = resourceInfoService.getTreeList(query);
             result = ResultObject.getSuccess(treeList);
         }catch (Exception e){
@@ -77,4 +81,24 @@ public class ResourceController extends BaseController {
         return result;
     }
 
+    /**
+     * 根据角色id 获取配置资源树
+     * @param param
+     * @return
+     */
+    @PostMapping("getConfigTreeById")
+    public ResultObject getConfigTreeById(@RequestBody Map<String,Long> param){
+        log.info("params:  {}", param);
+        ResultObject result;
+        try{
+            Long roleId = param.get("roleId");
+            List<ResourceTreeBean> treeList = resourceInfoService.getConfigTreeById(roleId);
+            result = ResultObject.getSuccess(treeList);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure();
+        }
+        return result;
+    }
 }

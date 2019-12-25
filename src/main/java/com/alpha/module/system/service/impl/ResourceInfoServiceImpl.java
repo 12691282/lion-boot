@@ -30,28 +30,26 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         query.setState(DirectionConstant.USE_STATE);
         query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
         List<ResourceTreeBean> beansList =  resourceInfoMapper.selectBeanList(query);
-        if(beansList.isEmpty()){
-            return Collections.emptyList();
-        }
+        return this.toFillBeanTree(beansList);
 
-        List<ResourceTreeBean> treeList = new LinkedList<>();
-        this.toFillBeanTree(treeList, beansList);
-
-        return  treeList;
     }
 
     /**
      * 从顶层开始遍历
-     * @param treeList
      * @param beansList
      */
-    private void toFillBeanTree(List<ResourceTreeBean> treeList, List<ResourceTreeBean> beansList) {
+    private List<ResourceTreeBean> toFillBeanTree(List<ResourceTreeBean> beansList) {
+        List<ResourceTreeBean> treeList = new LinkedList<>();
+        if(beansList.isEmpty()){
+            return treeList;
+        }
         for(ResourceTreeBean bean : beansList){
             if(bean.getPid() == null){
                 treeList.add(bean);
                 this.toRecursionTree(bean,beansList);
             }
         }
+        return treeList;
     }
     /**
      * 递归生成树
@@ -66,8 +64,6 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
             }
         }
    }
-
-
 
     @Override
     @Transactional
@@ -102,8 +98,16 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         query.setState(DirectionConstant.USE_STATE);
         query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
         List<ResourceTreeBean> beansList =  resourceInfoMapper.selectBeanList(query);
-        List<ResourceTreeBean> treeList = new LinkedList<>();
-        this.toFillBeanTree(treeList, beansList);
-        return treeList;
+        return  this.toFillBeanTree(beansList);
+    }
+
+    @Override
+    public List<ResourceTreeBean> getConfigTreeById(Long roleId) {
+        ResourceTreeBean query = new ResourceTreeBean();
+        log.info("roleId {}", roleId);
+        query.setRoleId(roleId);
+        query.setState(DirectionConstant.USE_STATE);
+        List<ResourceTreeBean> beansList =  resourceInfoMapper.getConfigTreeById(query);
+        return this.toFillBeanTree(beansList);
     }
 }
