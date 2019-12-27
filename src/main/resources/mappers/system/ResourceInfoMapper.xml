@@ -32,4 +32,21 @@
         ORDER BY a.order_no ASC
     </select>
 
+
+    <select id="getResourceListAccountId" parameterType="java.util.Map"
+            resultType="com.alpha.module.system.bean.ResourceTreeBean">
+         SELECT b.id, b.pid, b.resource_name AS resourceName,
+                b.`resource_url` AS resourceUrl, b.`icon`
+         FROM
+         (
+             SELECT  b.resource_id  FROM sys_account_relation_role a
+             LEFT JOIN sys_role_relation_resource b ON b.role_id = a.role_id
+             WHERE a.account_id = #{id} AND b.resource_id IS NOT NULL
+             GROUP BY b.resource_id
+         ) a
+         LEFT JOIN  sys_resource b ON b.id = a.resource_id
+         ORDER BY order_no
+    </select>
+
+
 </mapper>

@@ -110,4 +110,12 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         List<ResourceTreeBean> beansList =  resourceInfoMapper.getConfigTreeById(query);
         return this.toFillBeanTree(beansList);
     }
+
+
+    @Override
+    public List getResourceListAccountId(Long id) {
+        log.info("account id {}", id);
+        List<ResourceTreeBean> beansList = resourceInfoMapper.getResourceListAccountId(id);
+        return this.toFillBeanTree(beansList);
+    }
 }

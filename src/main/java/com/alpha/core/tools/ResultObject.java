@@ -66,4 +66,9 @@ public class ResultObject<T> implements Serializable {
     {
         return new ResultObject(defeat_code, msg);
     }
+
+    public static ResultObject getFailure(String code, String msg)
+    {
+        return new ResultObject(code, msg);
+    }
 }

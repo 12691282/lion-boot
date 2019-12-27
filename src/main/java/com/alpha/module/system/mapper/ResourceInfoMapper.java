@@ -22,4 +22,10 @@ public interface ResourceInfoMapper extends BaseMapper<ResourceModel> {
      * @return
      */
     List<ResourceTreeBean> getConfigTreeById(ResourceTreeBean query);
+    /**
+     * 获取已配置的资源树
+     * @param id
+     * @return
+     */
+    List<ResourceTreeBean>  getResourceListAccountId(@Param("id")  Long id);
 }

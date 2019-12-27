@@ -23,13 +23,13 @@ public class WebInfoConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 拦截所有请求
-        registry.addInterceptor(apiParameterInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(apiParameterInterceptor()).addPathPatterns("/**").excludePathPatterns("/account/login");
     }
 
 
     @Bean
-    public ApiParameterInterceptor apiParameterInterceptor() {
-        return new ApiParameterInterceptor();
+    public TokenParameterInterceptor apiParameterInterceptor() {
+        return new TokenParameterInterceptor();
     }
 
 

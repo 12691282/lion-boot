@@ -49,4 +49,6 @@ public interface AccountService {
      * @return
      */
     UserInfoBean loginByAccount(AccountModel account);
+
+
 }

@@ -36,4 +36,11 @@ public interface ResourceInfoService {
      * @return
      */
     List<ResourceTreeBean> getConfigTreeById(Long roleId);
+
+    /**
+     * 根据用户id获取资源列表
+     * @param id
+     * @return
+     */
+    List getResourceListAccountId(Long id);
 }

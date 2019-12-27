@@ -8,6 +8,7 @@ import com.alpha.core.tools.PageTools;
 import com.alpha.core.tools.TokenTools;
 import com.alpha.module.system.bean.UserInfoBean;
 import com.alpha.module.system.mapper.AccountMapper;
+import com.alpha.module.system.mapper.ResourceInfoMapper;
 import com.alpha.module.system.model.AccountModel;
 import com.alpha.module.system.service.AccountService;
 import com.alpha.module.system.service.ResourceInfoService;
@@ -30,6 +31,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     @Autowired
     private ResourceInfoService resourceInfoService;
+
+    @Autowired
+    private ResourceInfoMapper resourceInfoMapper;
 
     @Override
     public PageTools getList(AccountModel query) {

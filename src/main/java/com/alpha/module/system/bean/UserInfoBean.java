@@ -22,4 +22,7 @@ public class UserInfoBean {
     //过期时间
     private Date expireTime;
 
+    public boolean isTimeOut() {
+        return new Date().after(this.getExpireTime());
+    }
 }
