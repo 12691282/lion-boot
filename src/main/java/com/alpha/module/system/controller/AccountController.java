@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("account")
@@ -126,6 +127,25 @@ public class AccountController extends BaseController {
             UserInfoBean bean = accountService.loginByAccount(account);
             UserInfoTool.setUserInfo(bean);
             result = ResultObject.getSuccess(bean);
+        }catch (SystemException e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            result = ResultObject.getFailure(e.getMsg());
+        }
+        return result;
+    }
+
+
+    @PostMapping("logout")
+    public ResultObject logout(@RequestBody Map params){
+        log.info("params: {}", params);
+        ResultObject result;
+        try{
+            Object token = params.get("token");
+            if(token  != null){
+                UserInfoTool.removeUserInfoByToken(token.toString());
+            }
+            result = ResultObject.getSuccess();
         }catch (SystemException e){
             e.printStackTrace();
             log.error(e.getMessage());
