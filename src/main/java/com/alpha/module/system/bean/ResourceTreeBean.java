@@ -1,6 +1,5 @@
 package com.alpha.module.system.bean;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +9,11 @@ import java.util.List;
 
 @Data
 public class ResourceTreeBean implements Serializable {
+
+
+    //   资源类型 0:菜单1按钮
+    public static Integer RESOURCE_MENU_TYPE = 0;
+
     //主键
     private Long id;
     //父主键

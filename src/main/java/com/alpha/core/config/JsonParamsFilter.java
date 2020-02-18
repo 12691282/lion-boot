@@ -1,9 +1,10 @@
 package com.alpha.core.config;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alpha.core.constant.ConfigConstant;
-import com.alpha.core.tools.ThreadLoaclTools;
+import com.alpha.core.tools.ThreadLocalTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 
@@ -25,7 +26,7 @@ public class JsonParamsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("---------order 1 -----执行过滤操作------------");
+        log.info("---------order 1 -----执行过滤操作------------");
 
         // 防止流读取一次后就没有了, 所以需要将流继续写出去
 
@@ -33,22 +34,22 @@ public class JsonParamsFilter implements Filter {
         if(contentType != null && contentType.contains(ConfigConstant.accpetType)){
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             JsonReaderHttpServletRequestWrapper wrapper =  new JsonReaderHttpServletRequestWrapper(httpServletRequest);
-            JSONObject parameterMap = JSON.parseObject(wrapper.toBodyString());
-            Object size = parameterMap.getString("size");
-            Object index = parameterMap.getString("index");
-            if(size != null && index != null){
-                Map pageMap = new HashMap<>();
-                pageMap.put("size", Integer.valueOf(size.toString()));
-                pageMap.put("index",  Integer.valueOf(index.toString()));
-                ThreadLoaclTools.getPageMap().set(pageMap);
+            try {
+                JSONObject parameterMap = JSON.parseObject(wrapper.toBodyString());
+                Object size = parameterMap.getString("size");
+                Object index = parameterMap.getString("index");
+                if(size != null && index != null){
+                    Map pageMap = new HashMap<>();
+                    pageMap.put("size", Integer.valueOf(size.toString()));
+                    pageMap.put("index",  Integer.valueOf(index.toString()));
+                    ThreadLocalTools.getPageMap().set(pageMap);
+                }
+            }catch (JSONException e){
+                log.info("can not change json obj");
             }
-
-
             servletRequest =  wrapper;
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
-
     }
 
     @Override

@@ -64,8 +64,6 @@ public class AccountServiceImpl extends BaseService implements AccountService {
                     throw new SystemException(ExceptionConstant.MESSAGE_NAME_EXIST);
                 }
             }
-
-
     }
 
     @Override

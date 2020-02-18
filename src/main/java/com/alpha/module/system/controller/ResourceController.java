@@ -48,11 +48,11 @@ public class ResourceController extends BaseController {
 
 
     @PostMapping("saveOrUpdate")
-    public ResultObject saveOrUpdate(@RequestBody ResourceModel account){
-        log.info("params: {}", account);
+    public ResultObject saveOrUpdate(@RequestBody ResourceModel resource){
+        log.info("params: {}", resource);
         ResultObject result = ResultObject.getSuccess();
         try{
-            resourceInfoService.saveOrUpdate(account);
+            resourceInfoService.saveOrUpdate(resource);
         }catch (SystemException sysExc){
             sysExc.printStackTrace();
             log.error(sysExc.getMessage());
