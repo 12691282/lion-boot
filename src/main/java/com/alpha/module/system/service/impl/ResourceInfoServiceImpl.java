@@ -29,7 +29,7 @@ public class ResourceInfoServiceImpl extends BaseService implements ResourceInfo
         log.info("query {}", query);
         query.setState(DirectionConstant.USE_STATE);
         query.setTypeCode(DirectionConstant.CODE_RESOURCE_TYPE);
-        query.setResourceType(0);
+        query.setResourceType(ResourceTreeBean.RESOURCE_MENU_TYPE);
         List<ResourceTreeBean> beansList =  resourceInfoMapper.selectBeanList(query);
         return this.toFillBeanTree(beansList);
 
