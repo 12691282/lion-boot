@@ -105,7 +105,7 @@ CREATE TABLE `sys_resource`  (
   `id` bigint(12) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `pid` bigint(12) DEFAULT NULL COMMENT '父主键',
   `resource_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源名字',
-  `resource_url` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源链接',
+  `resource_url` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源链接',
   `resource_type` tinyint(1) DEFAULT NULL COMMENT '资源类型: 0:菜单1按钮',
   `icon` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图标',
   `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '描述',
