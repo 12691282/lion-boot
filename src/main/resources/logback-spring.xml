@@ -24,7 +24,7 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue="lion-boot"/>
     <!-- 定义日志文件 输入位置 -->
-    <property name="log.path" value="../logs/${spring.application.name}" />
+    <property name="log.path" value="./logs/${spring.application.name}" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
 
